@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LoopRides — 10 Year Membership</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23ff6a3d'/><path d='M30 60c10-20 30-20 40 0' stroke='%23fff' stroke-width='6' stroke-linecap='round' fill='none'/></svg>">
+
+<style>
+  /* ========== Theme & base ========== */
+  :root{
+    --bg1: #fff7f1;
+    --bg2: #fff2ea;
+    --warm-1: #ff6a3d; /* coral/orange */
+    --warm-2: #ffb86b; /* warm yellow */
+    --muted: #6b6b75;
+    --card:#ffffff;
+    --glass: rgba(255,255,255,0.7);
+    --radius:16px;
+    --shadow: 0 12px 30px rgba(12,18,30,0.08);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:#1b1b1f;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+    overflow-x:hidden;
+  }
+  .app{
+    max-width:1200px;
+    margin:20px auto;
+    padding:20px;
+  }
+
+  /* ========== header/logo ========== */
+  header.app-header{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+    padding:14px 18px;
+    border-radius:14px;
+    box-shadow: var(--shadow);
+    position:sticky;
+    top:12px;
+    z-index:20;
+  }
+  .logo-wrap{display:flex; gap:12px; align-items:center;}
+  .logo-svg{width:84px; height:54px; display:block;}
+  .brand{
+    font-weight:800;
+    font-size:20px;
+    letter-spacing:0.2px;
+  }
+  .tagline{font-size:12px; color:var(--muted)}
+
+  .header-actions{margin-left:auto; display:flex; gap:10px; align-items:center;}
+  .btn{
+    border:0; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:700;
+    box-shadow:0 8px 20px rgba(16,20,30,0.06);
+  }
+  .btn-primary{background:linear-gradient(90deg,var(--warm-1),#ff8f5a); color:white;}
+  .btn-ghost{background:transparent; border:1px solid rgba(0,0,0,0.06); color:var(--warm-1);}
+
+  /* ========== two full-page sections (hero and body) ========== */
+  .page{
+    min-height: calc(100vh - 130px);
+    display:grid;
+    grid-template-columns: 1fr 450px;
+    gap:28px;
+    align-items:center;
+    margin-top:20px;
+  }
+  @media (max-width:980px){
+    .page{grid-template-columns:1fr; padding-bottom:30px;}
+  }
+
+  /* hero left */
+  .hero-card{
+    background:var(--card);
+    padding:28px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+  .title{
+    font-size:44px; line-height:1.05; margin:0 0 10px 0; font-weight:800;
+    color:#1b1b1f;
+  }
+  .subtitle{font-size:16px; color:var(--muted); margin:0 0 18px 0;}
+  .big-cta{font-size:16px;}
+  .offer-badge{
+    display:inline-block;
+    background:linear-gradient(90deg,var(--warm-2),#ffd7b0);
+    color:#5a2b00; padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px; 
+    margin-right:10px; box-shadow:0 6px 18px rgba(255,110,70,0.12);
+  }
+
+  /* features row animated */
+  .features{
+    display:flex; gap:12px; margin-top:18px; flex-wrap:wrap;
+  }
+  .feature{
+    flex:1; min-width:170px; background:linear-gradient(180deg, #fff, rgba(255,255,255,0.96));
+    border-radius:12px; padding:14px; box-shadow: 0 8px 18px rgba(12,18,30,0.04);
+    display:flex; gap:12px; align-items:center;
+    transform: translateY(0); transition: transform 420ms ease;
+  }
+  .feature:hover{ transform: translateY(-8px); }
+  .feature .icon{
+    width:44px; height:44px; border-radius:10px; display:grid; place-items:center;
+    background: linear-gradient(90deg, rgba(255,110,70,0.12), rgba(255,184,106,0.08));
+    color:var(--warm-1); font-weight:800;
+    font-size:22px;
+  }
+  .feature .text{font-weight:700; color:#1b1b1f; font-size:14px}
+
+  /* right visual panel */
+  .visual{
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.96));
+    border-radius:14px; padding:18px; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:12px; align-items:center;
+  }
+  .visual .anim{
+    width:100%; height:260px; border-radius:10px; overflow:hidden; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, rgba(255,110,70,0.06), rgba(255,184,106,0.02));
+  }
+  .fleet-sample{
+    width:92%; height:200px; display:flex; gap:8px; align-items:center; justify-content:center;
+  }
+  .fleet-sample img{width:48%; height:180px; object-fit:cover; border-radius:12px; box-shadow:0 12px 28px rgba(11,18,30,0.08);}
+
+  /* upsell banner */
+  .upsell{
+    margin-top:12px; width:100%; background:linear-gradient(90deg,#fff5ee,#fffaf6); padding:10px 12px; border-radius:10px; 
+    border:1px solid rgba(255,150,90,0.06); display:flex; gap:10px; align-items:center; justify-content:space-between;
+  }
+  .upsell strong{color:var(--warm-1); font-size:15px}
+
+  /* second section: details, cards and tabs */
+  .content{
+    margin-top:18px; display:grid; gap:18px;
+  }
+  .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  @media (max-width:980px){ .cards{ grid-template-columns:1fr; } }
+  .card{
+    background:var(--card); padding:16px; border-radius:12px; box-shadow:var(--shadow);
+  }
+  .card h3{ margin:0 0 8px 0; font-size:18px;}
+  .card p{ margin:0; color:var(--muted) }
+
+  /* categories tabs */
+  .tabs{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+  .tab-btn{ padding:10px 14px; border-radius:999px; background:transparent; border:1px solid rgba(0,0,0,0.06); cursor:pointer; font-weight:700; color:var(--warm-1); }
+  .tab-btn.active{ background:linear-gradient(90deg,var(--warm-1),#ff8f5a); color:white; box-shadow:0 10px 26px rgba(255,110,70,0.08) }
+
+  .tab-panel{ margin-top:12px; display:block; background:linear-gradient(180deg,#fff,#fffaf7); padding:14px; border-radius:12px; box-shadow:0 10px 26px rgba(12,18,30,0.04) }
+  .tier{display:flex; gap:12px; align-items:center; margin-bottom:10px;}
+  .tier .badge{ width:88px; font-weight:800; padding:8px 10px; border-radius:8px; background:linear-gradient(90deg,#ffb86b,#ff8f5a); color:white; text-align:center}
+  .tier .desc{ color:var(--muted) }
+
+  /* poll styles */
+  .poll{
+    margin-top:20px; padding:14px; border-radius:12px; background:linear-gradient(180deg,#fff, #fffaf0); box-shadow:var(--shadow)
+  }
+  .poll h3{ margin:0 0 8px 0; font-size:18px; }
+  .poll .opt{ display:flex; gap:12px; align-items:center; padding:12px; border-radius:10px; background:linear-gradient(180deg,#fff,#fffefc); border:1px solid rgba(0,0,0,0.04); cursor:pointer; transition:transform 160ms ease }
+  .poll .opt:hover{ transform:translateY(-6px) }
+  .bar-wrap{flex:1; height:14px; background:#fff6f2; border-radius:9px; overflow:hidden; }
+  .bar{height:100%; width:0%; background:linear-gradient(90deg,var(--warm-1), #ffb86b); transition: width 800ms ease; }
+  .count{min-width:68px; text-align:right; font-weight:800; color:var(--warm-1)}
+
+  /* footer */
+  footer{ margin-top:28px; text-align:center; color:var(--muted); font-size:13px; }
+
+  /* subtle floating animation for icons */
+  @keyframes floaty { 0%{transform:translateY(0)} 50%{transform:translateY(-8px)} 100%{transform:translateY(0)} }
+  .floaty { animation: floaty 4s ease-in-out infinite; }
+
+</style>
+</head>
+<body>
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="app-header" role="banner">
+      <div class="logo-wrap">
+        <!-- SVG logo: infinity loop behind + three two-wheel icons -->
+        <svg class="logo-svg" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+          <!-- infinity soft loop -->
+          <path d="M20 60 C40 12 100 12 120 60 C140 108 200 108 220 60" stroke="#ffb86b" stroke-width="26" stroke-linecap="round" fill="none" opacity="0.28"/>
+          <!-- small center loop -->
+          <path d="M62 60 C78 36 122 36 138 60 C154 84 198 84 214 60" stroke="#ff6a3d" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.16"/>
+          <!-- three wheel icons (very simple shapes) -->
+          <g transform="translate(6,0)" fill="none" stroke="#4a2a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="28" cy="84" r="10"/>
+            <circle cx="68" cy="84" r="10"/>
+            <path d="M36 76 l20 -14 l12 0" />
+          </g>
+        </svg>
+
+        <div>
+          <div class="brand">LoopRides</div>
+          <div class="tagline">10-Year Membership • Swap within category • Bonus 100 hours for luxury</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-ghost" onclick="scrollToSection('features')">How it works</button>
+        <button class="btn btn-primary" onclick="alert('Join flow placeholder — integrate signup later')">Join 10-Year Plan</button>
+      </div>
+    </header>
+
+    <!-- MAIN: two columns (hero left, visual right) -->
+    <main class="page" role="main" aria-labelledby="main-title">
+
+      <!-- LEFT HERO -->
+      <section class="hero-card" id="hero">
+        <div style="display:flex; gap:12px; align-items:center; margin-bottom:8px;">
+          <div class="offer-badge">LIMITED: +100 bonus hours</div>
+          <div style="color:var(--muted); font-size:13px; font-weight:600">for Villa / Luxury vehicle swaps (Pro & Premium models)</div>
+        </div>
+
+        <h1 class="title" id="main-title">Freedom to ride — without owning.</h1>
+        <p class="subtitle">LoopRides offers a 10-year membership: you keep the vehicle, no driver, swap across bikes in your category — Pro, Premium, Daily, or Electric. Maintenance, servicing, and breakdown support are included.</p>
+
+        <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
+          <button class="btn btn-primary big-cta" onclick="alert('Sign up placeholder')">Get 10-Year Membership</button>
+          <button class="btn btn-ghost" onclick="scrollToSection('poll')">Vote on this idea</button>
+        </div>
+
+        <div class="features" aria-hidden="false">
+          <div class="feature floaty">
+            <div class="icon">🔀</div>
+            <div>
+              <div class="text">Full flexibility</div>
+              <div style="font-size:13px; color:var(--muted)">Swap within your category anytime</div>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="icon">🛠️</div>
+            <div>
+              <div class="text">Maintenance included</div>
+              <div style="font-size:13px; color:var(--muted)">Servicing, breakdown assistance & insurance help</div>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="icon">💸</div>
+            <div>
+              <div class="text">Transparent pricing</div>
+              <div style="font-size:13px; color:var(--muted)">No handling fees, no resale hassle</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- quick benefits -->
+        <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+          <div style="background:#fff6f0; padding:12px; border-radius:10px; font-weight:700; color:#b34d28">Benefit: Ownership-free mobility</div>
+          <div style="background:#fff9ee; padding:12px; border-radius:10px; color:var(--muted)">Cost of vehicle coverage in plan • Servicing covered • Roadside support</div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT VISUAL -->
+      <aside class="visual" id="visual" aria-hidden="true">
+        <div class="anim" role="img" aria-label="Animated fleet">
+          <div class="fleet-sample">
+            <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1200&auto=format&fit=crop&s=placeholder" alt="Scooter sample">
+            <img src="https://images.unsplash.com/photo-1515150144380-8dcaec9b1b8b?q=80&w=1200&auto=format&fit=crop&s=placeholder" alt="Motorbike sample">
+          </div>
+        </div>
+
+        <div class="upsell">
+          <div>
+            <div style="font-size:14px; color:var(--muted)">Special</div>
+            <div style="font-weight:800; font-size:16px">Premium & Pro members get <span style="color:var(--warm-1)">+100 bonus hours</span> for luxury vehicles every 12 months</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:12px; color:var(--muted)">Starting at</div>
+            <div style="font-weight:900; font-size:20px; color:#5a2a14">₹8,999/yr</div>
+          </div>
+        </div>
+
+      </aside>
+    </main>
+
+    <!-- Second big content area -->
+    <section id="features" class="content">
+      <div class="card">
+        <h3>Why LoopRides is great for students & commuters</h3>
+        <p style="margin:8px 0 0 0; color:var(--muted)">
+          LoopRides removes ownership headaches. You pay a membership that approximates the vehicle's operating cost but excludes the hassles: servicing, breakdowns, resale, insurance paperwork and unexpected maintenance. Switch between models in the same category — Pro for performance, Premium for comfort, Daily for budget, Electric for eco.
+        </p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Full Flexibility</h3>
+          <p>Swap to any available model inside your plan category. No driver — the vehicle is assigned to you with simple online swaps.</p>
+        </div>
+        <div class="card">
+          <h3>All-inclusive Maintenance</h3>
+          <p>Service schedules, consumables and roadside assistance included in higher tiers. No surprise repair bills.</p>
+        </div>
+        <div class="card">
+          <h3>Transparent Billing</h3>
+          <p>Clear membership tiers, upgrades and add-ons—100 bonus hours for luxury vehicles shown on the plan.</p>
+        </div>
+      </div>
+
+      <!-- membership tiers summary -->
+      <div class="card">
+        <h3>Membership tiers (examples)</h3>
+        <div style="display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:170px; background:linear-gradient(180deg,#fff,#fffaf6); padding:12px; border-radius:10px">
+            <div style="font-weight:800">Daily</div>
+            <div style="color:var(--muted); margin-top:6px">Budget-friendly • Basic swaps • Limited support</div>
+            <div style="font-weight:900; margin-top:8px">₹2,999 / yr</div>
+          </div>
+          <div style="flex:1; min-width:170px; background:linear-gradient(180deg,#fff,#fffaf6); padding:12px; border-radius:10px">
+            <div style="font-weight:800">Premium</div>
+            <div style="color:var(--muted); margin-top:6px">Comfort models • 6 swaps/year • Maintenance included</div>
+            <div style="font-weight:900; margin-top:8px">₹5,499 / yr</div>
+          </div>
+          <div style="flex:1; min-width:170px; background:linear-gradient(180deg,#fff,#fffaf6); padding:12px; border-radius:10px">
+            <div style="font-weight:800">Pro</div>
+            <div style="color:var(--muted); margin-top:6px">Top models • Unlimited swaps • Concierge</div>
+            <div style="font-weight:900; margin-top:8px">₹8,999 / yr</div>
+            <div style="margin-top:8px; color:var(--warm-1); font-weight:800">+100 bonus hours for luxury vehicles</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- categories tabs -->
+      <div class="card" aria-labelledby="cat-title">
+        <h3 id="cat-title">Vehicle categories</h3>
+        <div class="tabs" role="tablist" aria-label="Categories">
+          <button class="tab-btn active" data-tab="pro">Pro</button>
+          <button class="tab-btn" data-tab="premium">Premium</button>
+          <button class="tab-btn" data-tab="daily">Daily</button>
+          <button class="tab-btn" data-tab="electric">Electric</button>
+        </div>
+
+        <div id="tab-content" class="tab-panel" aria-live="polite">
+          <!-- default content inserted by JS -->
+        </div>
+      </div>
+
+      <!-- Poll -->
+      <div class="poll card" id="poll" aria-labelledby="poll-title">
+        <h3 id="poll-title">Did you like the LoopRides idea?</h3>
+        <p style="color:var(--muted); margin-top:6px">Vote once — your vote is saved locally in this browser. You can change your vote.</p>
+
+        <div id="poll-options" style="margin-top:10px; display:flex; flex-direction:column; gap:10px;">
+          <!-- Options rendered by JS -->
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;">
+          <div style="color:var(--muted)" id="totalCount">Total votes: 0</div>
+          <div>
+            <button class="btn btn-ghost" onclick="clearLocalVotes()" title="Clear local votes">Reset local</button>
+            <button class="btn btn-primary" onclick="copyShareInfo()">Share link</button>
+          </div>
+        </div>
+
+        <div style="margin-top:8px; color:var(--muted); font-size:13px">Tip: To collect real global votes, host this file online (I can help with GitHub Pages or Netlify).</div>
+      </div>
+
+    </section>
+
+    <footer>
+      © <span id="year"></span> LoopRides — Freedom to ride. Contact: support@looprides.example
+    </footer>
+
+  </div>
+
+<script>
+/* =========================
+   Tabs content (Pro/Premium/Daily/Electric)
+   ========================= */
+const tabs = document.querySelectorAll('.tab-btn');
+const tabContent = document.getElementById('tab-content');
+
+const contentMap = {
+  pro: `
+    <div class="tier">
+      <div class="badge">PRO</div>
+      <div>
+        <div style="font-weight:800">High-performance models</div>
+        <div class="desc">Best for enthusiasts. Unlimited swaps in category, concierge delivery, +100 bonus hours for villa/luxury vehicles.</div>
+      </div>
+    </div>
+    <div><strong>Example models:</strong> Performance motorbikes, premium scooters.</div>
+  `,
+  premium: `
+    <div class="tier">
+      <div class="badge">PREMIUM</div>
+      <div>
+        <div style="font-weight:800">Comfort-focused</div>
+        <div class="desc">Great balance of comfort and cost. Priority servicing and more swap slots.</div>
+      </div>
+    </div>
+    <div><strong>Example models:</strong> Mid-range bikes, comfort scooters.</div>
+  `,
+  daily: `
+    <div class="tier">
+      <div class="badge" style="background:linear-gradient(90deg,#ffd9c1,#ffd0a3); color:#6b3b20">DAILY</div>
+      <div>
+        <div style="font-weight:800">Budget-friendly</div>
+        <div class="desc">Affordable option for daily commuters — limited swaps but very low cost.</div>
+      </div>
+    </div>
+    <div><strong>Example models:</strong> Economy scooters and commuter bikes.</div>
+  `,
+  electric: `
+    <div class="tier">
+      <div class="badge" style="background:linear-gradient(90deg,#8ef2c5,#4de6ad); color:#0b4f3b">ELECTRIC</div>
+      <div>
+        <div style="font-weight:800">Eco & quiet</div>
+        <div class="desc">Electric scooters and bikes — charging support & eco-friendly options.</div>
+      </div>
+    </div>
+    <div><strong>Example models:</strong> Popular electric scooters and E-bikes.</div>
+  `
+};
+
+function setActiveTab(name){
+  tabs.forEach(t=> t.classList.toggle('active', t.dataset.tab === name));
+  tabContent.innerHTML = contentMap[name] || contentMap.pro;
+}
+// init
+setActiveTab('pro');
+tabs.forEach(btn => btn.addEventListener('click', ()=> setActiveTab(btn.dataset.tab)));
+
+/* =========================
+   Smooth scrolling helper
+   ========================= */
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* =========================
+   Polling code (localStorage)
+   ========================= */
+const POLL_KEY = 'looprides_poll_v1';
+const VOTED_KEY = 'looprides_poll_voted';
+const options = [
+  "Yes — Love it",
+  "Good, needs improvements",
+  "Not sure yet",
+  "No — not for me"
+];
+
+// Ensure votes array exists
+function loadVotes(){
+  const raw = localStorage.getItem(POLL_KEY);
+  if(!raw) {
+    const zeros = new Array(options.length).fill(0);
+    localStorage.setItem(POLL_KEY, JSON.stringify(zeros));
+    return zeros;
+  }
+  try{ const arr = JSON.parse(raw); if(Array.isArray(arr) && arr.length === options.length) return arr; }
+  catch(e){}
+  const zeros = new Array(options.length).fill(0);
+  localStorage.setItem(POLL_KEY, JSON.stringify(zeros));
+  return zeros;
+}
+function saveVotes(arr){ localStorage.setItem(POLL_KEY, JSON.stringify(arr)); }
+
+function renderPoll(){
+  const container = document.getElementById('poll-options');
+  container.innerHTML = '';
+  const votes = loadVotes();
+  const total = votes.reduce((a,b)=>a+b,0);
+  options.forEach((label,i)=>{
+    const count = votes[i] || 0;
+    const percent = total === 0 ? 0 : Math.round((count/total)*1000)/10; // 1 decimal
+    const opt = document.createElement('div');
+    opt.className = 'opt';
+    opt.innerHTML = `
+      <div style="display:flex; align-items:center; gap:12px; width:100%;">
+        <div style="font-weight:900; color:var(--warm-1); width:36px; text-align:center;">${i+1}</div>
+        <div style="flex:1;">
+          <div style="font-weight:800">${label}</div>
+          <div style="margin-top:6px;"><div class="bar-wrap"><div class="bar" style="width:${percent}%"></div></div></div>
+        </div>
+        <div class="count">${percent}% <div style="font-size:12px; color:var(--muted)">(${count})</div></div>
+      </div>
+    `;
+    opt.onclick = ()=> castVote(i);
+    container.appendChild(opt);
+  });
+  document.getElementById('totalCount').textContent = 'Total votes: ' + votes.reduce((a,b)=>a+b,0);
+}
+function castVote(index){
+  const voted = localStorage.getItem(VOTED_KEY);
+  let votes = loadVotes();
+  if(voted === null){
+    votes[index] = (votes[index]||0) + 1;
+    saveVotes(votes);
+    localStorage.setItem(VOTED_KEY, String(index));
+    renderPoll();
+    showToast('Thanks for voting! Your vote is saved locally.');
+    return;
+  }
+  // change vote
+  const prev = parseInt(voted,10);
+  if(prev === index){ showToast('You already voted for this option.'); return; }
+  if(votes[prev] && votes[prev] > 0) votes[prev] = votes[prev] - 1;
+  votes[index] = (votes[index]||0) + 1;
+  saveVotes(votes);
+  localStorage.setItem(VOTED_KEY, String(index));
+  renderPoll();
+  showToast('Vote changed. Thanks!');
+}
+
+function clearLocalVotes(){
+  if(!confirm('Clear local votes? This will reset poll results in this browser only.')) return;
+  localStorage.removeItem(POLL_KEY);
+  localStorage.removeItem(VOTED_KEY);
+  renderPoll();
+  showToast('Local votes cleared.');
+}
+
+function copyShareInfo(){
+  const url = location.href;
+  navigator.clipboard?.writeText(url).then(()=> showToast('Page link copied. Host online to share with others.'), ()=> showToast('Copy failed'));
+}
+
+/* tiny toast */
+function showToast(msg){
+  const el = document.createElement('div');
+  el.textContent = msg;
+  Object.assign(el.style, {
+    position:'fixed', left:'50%', transform:'translateX(-50%)', bottom:'28px',
+    background:'linear-gradient(90deg,var(--warm-1), #ff8f5a)', color:'white',
+    padding:'10px 14px', borderRadius:'10px', zIndex:9999, boxShadow:'0 8px 24px rgba(30,20,10,0.12)'
+  });
+  document.body.appendChild(el);
+  setTimeout(()=> el.style.opacity = '0', 2200);
+  setTimeout(()=> el.remove(), 2600);
+}
+
+/* initialize poll UI */
+renderPoll();
+
+/* set current year in footer */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* simple accessibility: keyboard support for tabs */
+tabs.forEach((t,i)=> {
+  t.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowRight') { const next = tabs[(i+1)%tabs.length]; next.focus(); next.click(); }
+    if(e.key === 'ArrowLeft') { const prev = tabs[(i-1+tabs.length)%tabs.length]; prev.focus(); prev.click(); }
+  });
+});
+
+/* small floating animation timer for visual interest: cycle images opacity */
+(function cycleFleet(){
+  const imgs = document.querySelectorAll('.fleet-sample img');
+  let idx=0;
+  setInterval(()=>{
+    imgs.forEach((im,i)=> im.style.opacity = (i===idx? '1':'0.5'));
+    idx = (idx+1) % imgs.length;
+  }, 2200);
+})();
+</script>
+</body>
+</html>
